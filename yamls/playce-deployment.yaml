@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: playce-cloud
+  namespace: osci
+  labels:
+    app: playce-cloud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: playce-cloud
+  template:
+    metadata:
+      labels:
+        app: playce-cloud
+    spec:
+      containers:
+      - name: playce-cloud
+        image: 192.168.0.100:5000/osci/playce-cloud:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        env:
+        - name: LC_ALL
+          value: C.UTF-8
+        - name: TZ
+          value: Asia/Seoul
